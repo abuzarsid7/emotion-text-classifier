@@ -17,7 +17,7 @@ The model detects the following emotions:
 ---
 
 ## 🏗️ Project Structure
-
+```
 my-ml-project/
 ├── data/                  # CSVs from training (auto-generated)
 ├── model.py               # Script to train + save model
@@ -26,6 +26,7 @@ my-ml-project/
 ├── vectorizer.joblib      # Saved TF-IDF vectorizer
 ├── requirements.txt       # All required dependencies
 └── README.md              # You’re reading it!
+```
 ---
 
 ## ⚙️ How to Set Up
