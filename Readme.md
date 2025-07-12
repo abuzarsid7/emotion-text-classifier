@@ -47,12 +47,14 @@ source ml-env/bin/activate  # or ml-env\Scripts\activate on Windows
 ```
 pip install -r requirements.txt
 ```
-## 🧪 Train the Model (Optional)
+## 🧪 Train the Model 
 
 If you want to retrain the model from scratch:
+```
 python model.py
-
+```
 This will:
+
     •    Load Hugging Face emotion dataset
     •    Map 6 emotions 
     •    Train and evaluate model
