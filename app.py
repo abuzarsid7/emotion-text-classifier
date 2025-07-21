@@ -1,6 +1,9 @@
 import streamlit as st
 import joblib
 import numpy as np
+import csv
+from datetime import datetime
+import os
 
 # ✅ Custom labels from your model
 LABEL_NAMES = ["Angry", "Fear", "Happy", "Neutral", "Sad", "Surprise"]
@@ -42,7 +45,22 @@ if user_input.strip():
     st.markdown(f"### 🎯 Predicted Emotion: **{emotion}** {emoji}")
     st.write(f"🧪 **Confidence:** {confidence:.2f}%")
 
-    # Show all probabilities
+    # 📊 Show all probabilities
     st.subheader("📊 Emotion Probabilities")
     for i, label in enumerate(LABEL_NAMES):
         st.write(f"{label} {EMOTION_EMOJIS.get(label, '')}: {pred_proba[i]*100:.2f}%")
+
+    # 📝 Feedback section
+    st.subheader("📝 Feedback")
+    st.markdown("Was the prediction correct? You can correct it if needed:")
+
+    correct_emotion = st.selectbox("Select the correct emotion:", LABEL_NAMES, index=LABEL_NAMES.index(emotion))
+    if st.button("Submit Feedback"):
+        # Create data folder if not exists
+        os.makedirs("data", exist_ok=True)
+
+        # Save feedback to CSV
+        with open("data/user_feedback.csv", "a", newline='') as file:
+            writer = csv.writer(file)
+            writer.writerow([datetime.now(), user_input, emotion, correct_emotion, f"{confidence:.2f}"])
+        st.success("✅ Feedback saved. Thank you!")
